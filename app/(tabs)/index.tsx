@@ -1,3 +1,4 @@
+import * as MediaLibrary from "expo-media-library";
 import { View, StyleSheet } from "react-native";
 import ImageViewer from "@/components/ImageViewer";
 import Button from "@/components/Button";
@@ -14,6 +15,11 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 const PlaceholderImage = require("@/assets/images/background-image.png");
 
 export default function Index() {
+  const [status, requestPermission] = MediaLibrary.usePermissions();
+  if (status === null) {
+    requestPermission();
+  }
+
   const [selectedImage, setSelectedImage] = useState<string | undefined>(
     undefined
   );
